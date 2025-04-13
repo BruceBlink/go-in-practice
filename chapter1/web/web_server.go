@@ -5,7 +5,6 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
-	"syscall"
 	"time"
 )
 
@@ -32,7 +31,6 @@ func main() {
 	}
 
 	ch := make(chan os.Signal, 1)
-	signal.Notify(ch, os.Interrupt, syscall.SIGTERM)
 	signal.Notify(ch, os.Interrupt, os.Kill)
 
 	go func() {
