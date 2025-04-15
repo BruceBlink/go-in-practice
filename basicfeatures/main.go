@@ -35,8 +35,12 @@ func main() {
 	fmt.Println("second: ", *second) // 103
      **/
 	 names := [3]string {"Alice", "Charlie", "Bob"}
-	 secondPosition := &names[1]
-	 fmt.Println(*secondPosition)
+	/*  secondPosition := names[1]
+	 fmt.Println(secondPosition)  // Charlie
 	 sort.Strings(names[:])
-	 fmt.Println(*secondPosition)
+	 fmt.Println(secondPosition)  // Charlie */
+	 secondPosition := &names[1]
+	 fmt.Println(*secondPosition) //Charlie
+	 sort.Strings(names[:])
+	 fmt.Println(*secondPosition) // Bob
 }
