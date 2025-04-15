@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 //"math/rand"
 
@@ -16,6 +19,7 @@ func main() {
 	fmt.Println("first: ", first)  //   101
 	fmt.Println("second: ", *second) // 101
 	**/
+	/**
 	first := 100
 	second := &first
 
@@ -29,5 +33,10 @@ func main() {
 
 	fmt.Println("first: ", first)  //   103
 	fmt.Println("second: ", *second) // 103
-
+     **/
+	 names := [3]string {"Alice", "Charlie", "Bob"}
+	 secondPosition := &names[1]
+	 fmt.Println(*secondPosition)
+	 sort.Strings(names[:])
+	 fmt.Println(*secondPosition)
 }
