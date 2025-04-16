@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	c := make(chan int)
+	c := make(chan int, 100)
 	for i := range 5 {
 		worker := &Worker{id: i}
 		go worker.process(c)
@@ -26,5 +26,6 @@ func (w *Worker) process(c chan int) {
 	for {
 		data := <-c
 		fmt.Printf("worker %d got %d\n", w.id, data)
+		time.Sleep(time.Millisecond * 500)  // 模拟处理消息阻塞
 	}
 }
