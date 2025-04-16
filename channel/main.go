@@ -14,14 +14,11 @@ func main() {
 	}
 	for {
 		select{
-		case c <- rand.Int(): //channel容量足够
-			
-		default:  //channel不够时
-			fmt.Println("droped")
-
+		case c <- rand.Int(): //channel容量足够	
+		case <- time.After(time.Millisecond*100):
+			fmt.Println("timed out")
 		}
-		time.Sleep(time.Millisecond * 50)
-		
+	    time.Sleep(time.Millisecond * 50)
 	}
 }
 
@@ -31,8 +28,12 @@ type Worker struct {
 
 func (w *Worker) process(c chan int) {
 	for {
-		data := <-c
-		fmt.Printf("worker %d got %d\n", w.id, data)
-		time.Sleep(time.Millisecond * 500)  // 模拟处理消息阻塞
+		select {
+		case data := <-c:
+			fmt.Printf("worker %d got %d\n", w.id, data)
+		case<- time.After(time.Microsecond * 10):
+			fmt.Println("Break time")
+			time.Sleep(time.Second)
+		}
 	}
 }
