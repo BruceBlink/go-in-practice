@@ -13,8 +13,15 @@ func main() {
 		go worker.process(c)
 	}
 	for {
-		c <- rand.Int()
+		select{
+		case c <- rand.Int(): //channel容量足够
+			
+		default:  //channel不够时
+			fmt.Println("droped")
+
+		}
 		time.Sleep(time.Millisecond * 50)
+		
 	}
 }
 
